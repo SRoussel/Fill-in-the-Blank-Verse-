@@ -1,7 +1,12 @@
+"""
+Abandoned attempt at machine learning.
+
+@author Sam Roussel
+"""
+
 import tensorflow as tf
 import numpy as np
 import os
-import time
 
 # suppress GPU optimization error
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'

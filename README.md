@@ -19,7 +19,7 @@ To run the program, execute the following from the project directory:
  This system generates blank verse, that is, un-rhymed metrical poetry (in this case, iambic pentameter). Such verse was
  popularized by Marlowe, and used often by Shakespeare, as well as by Milton in Paradise Lost. 
  
- This system creates a Markov model from a large corpus of over three million line of poetry from
+ This system creates a Markov model from a large corpus of over three million lines of poetry from
  Project Gutenberg, courtesy of Allison Parish: https://github.com/aparrish/gutenberg-poetry-corpus.
  
 The system generates a number of lines; if they are iambic pentameter, they are kept. In addition, it uses
@@ -33,7 +33,7 @@ provide a meaningful connection between lines.
  there could be a lot of future work with seeding or evaluating future lines in different ways. 
  
  Markovify has built-in some important features, including checks that the text from the model does not resemble too closely the
- any text from the starting corpus. This is crucial in ensuring originality.  
+ any text from the starting corpus. This is crucial in ensuring _originality_.  
 
  ## Sources
  
