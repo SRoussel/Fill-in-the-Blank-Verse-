@@ -33,7 +33,10 @@ provide a meaningful connection between lines.
  there could be a lot of future work with seeding or evaluating future lines in different ways. 
  
  Markovify has built-in some important features, including checks that the text from the model does not resemble too closely the
- any text from the starting corpus. This is crucial in ensuring _originality_.  
+ any text from the starting corpus. This is crucial in ensuring _originality_.
+ 
+ Thus the poems are evaluated in a number of ways, from the originality checks to the iambic pentameter checks to the metaphorical
+ relations score. These map nicely onto to the concepts of novelty, typicality, and quality. 
 
  ## Sources
  

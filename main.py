@@ -55,36 +55,37 @@ def generate_model(n=1000000):
     return markovify.NewlineText(joined)
 
 
-def generate_text(model, num_lines=14, metaphorize=True, max_metaphor_attempts=20):
-    """Generates a poem from the given markov model"""
+def generate_text(model, num_lines=14, max_metaphor_attempts=5):
+    """Generates a poem from the given markov model; also returns the score (more metaphorical relations are better)"""
     nlp = spacy.load(SPACY_MODEL)
 
     generated = []
     previous = None
     metaphor_attempts = 0
+    score = num_lines
 
     while len(generated) < num_lines:
         line = model.make_sentence(tries=20, max_words=10, min_words=5)
         is_ten, line = make_ten_syllables(line)
 
         if is_ten and is_iambic_pentameter(line):
-            if not metaphorize:
-                generated.append(line)
             # bail out if we've tried over max_metaphor_attempts times
-            elif metaphor_attempts > max_metaphor_attempts or is_metaphorical(nlp, previous, line):
-                print(line, metaphor_attempts <= max_metaphor_attempts)
+            should_bail = metaphor_attempts > max_metaphor_attempts
+
+            if should_bail or is_metaphorical(nlp, previous, line):
+                # penalize if we've bailed out
+                score -= 1 if should_bail else 0
                 generated.append(line)
                 previous = line
                 metaphor_attempts = 0
             else:
                 metaphor_attempts += 1
 
-    return generated
+    return generated, score
 
 
 def is_metaphorical(nlp, line, candidate):
     """Checks for a metaphorical relation between line and candidate according to the Metaphor Magnet"""
-
     if line is None:
         return True
 
@@ -188,7 +189,9 @@ def perform(poem):
 
 
 def main():
-    perform(generate_text(generate_model()))
+    text, score = generate_text(generate_model())
+    perform(text)
+    print('Score: ' + score)
 
 
 if __name__ == '__main__':
